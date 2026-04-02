@@ -2,15 +2,30 @@ import { test, expect } from '@playwright/test'
 
 export class RequestHandler {
 
-    private baseUrl: string
+    private baseUrl: string | undefined
     private apiPath: string = ''
     private queryParams: object = {}
     private apiHeaders: object = {}
     private apiBody: object = {}
 
-    url(url: string) {}
-    path(path: string) {}
-    params(params: object) {}
-    headers(headers: object) {}
-    body(body: object) {}
+    url(url: string) {
+        this.baseUrl = url
+        return this
+    }
+    path(path: string) {
+        this.apiPath = path
+        return this
+    }
+    params(params: object) {
+        this.queryParams = params
+        return this
+    }
+    headers(headers: object) {
+        this.apiHeaders = headers
+        return this
+    }
+    body(body: object) {
+        this.apiBody = body
+        return this
+    }
 }

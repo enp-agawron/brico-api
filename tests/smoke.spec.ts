@@ -5,7 +5,17 @@ test("first", async ({ api }) => {
   const response = await api
     .path("/api/customers/authentication")
     .params({})
-    .getRequest();
+    .headers({
+      ContentType: "application/json",
+      Accept: "application/vnd.enp.api+json;version=v1"
+    })
+    .body({
+      grant_type: "client_credentials",
+      client_id: `${process.env.CLIENT_ID}`, // DO POPRAWY przeniesc do configa
+      client_secret: process.env.CLIENT_SECRET, // JW.
+      old_token: null,
+    })
+    .postRequest(200);
 });
 
 test("logger test", () => {

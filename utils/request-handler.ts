@@ -56,6 +56,7 @@ export class RequestHandler {
     const responseJSON = await response.json();
 
     this.logger.logResponse(actualStatus, responseJSON);
+    this.statusCodeValidator(actualStatus, statusCode, this.getRequest);
     expect(actualStatus).toEqual(statusCode);
 
     return responseJSON;
@@ -72,8 +73,8 @@ export class RequestHandler {
     const responseJSON = await response.json();
 
     this.logger.logResponse(actualStatus, responseJSON);
-    expect(actualStatus).toEqual(statusCode);
-
+    this.statusCodeValidator(actualStatus, statusCode, this.postRequest);
+   
     return responseJSON;
   }
 
@@ -88,8 +89,8 @@ export class RequestHandler {
     const responseJSON = await response.json();
 
     this.logger.logResponse(actualStatus, responseJSON);
-    expect(actualStatus).toEqual(statusCode);
-
+    this.statusCodeValidator(actualStatus, statusCode, this.putRequest);
+  
     return responseJSON;
   }
 
@@ -103,7 +104,7 @@ export class RequestHandler {
     // const responseJSON = await response.json();
 
     this.logger.logResponse(actualStatus);
-    expect(actualStatus).toEqual(statusCode);
+    this.statusCodeValidator(actualStatus, statusCode, this.deleteRequest);
   }
 
   private getUrl() {
@@ -116,14 +117,18 @@ export class RequestHandler {
     return url.toString();
   }
 
-  private statusCodeValidator(actualStatus: number, expectStatus: number, callingMethod: Function) {
+  private statusCodeValidator(
+    actualStatus: number,
+    expectStatus: number,
+    callingMethod: Function,
+  ) {
     if (actualStatus !== expectStatus) {
       const logs = this.logger.getRecentLogs();
       const error = new Error(
         `Status oczekiwany: ${expectStatus} otrzymano ${actualStatus} \n\n Ostatnia aktywność z API: \n${logs}`,
       );
-      Error.captureStackTrace(error, callingMethod)
-      throw error
+      Error.captureStackTrace(error, callingMethod);
+      throw error;
     }
   }
 }

@@ -1,4 +1,4 @@
-export class APILoger {
+export class APILogger {
   private recentLogs: any[] = [];
 
   logRequest(

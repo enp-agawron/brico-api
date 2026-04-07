@@ -1,5 +1,5 @@
 import { test } from "../utils/fixtures";
-import { APILoger } from "../utils/logger";
+import { APILogger } from "../utils/logger";
 
 test("first", async ({ api }) => {
   const response = await api
@@ -19,7 +19,7 @@ test("first", async ({ api }) => {
 });
 
 test("logger test", () => {
-  const logger = new APILoger();
+  const logger = new APILogger();
   logger.logRequest(
     "POST",
     "https://pre-brico.adafir.eu",

@@ -1,18 +1,18 @@
 import { test } from "../utils/fixtures";
 import { APILogger } from "../utils/logger";
 
-test("first", async ({ api }) => {
+test("first", async ({ api, config }) => {
   const response = await api
-    .path("/api/customers/authentication")
+    .path("/customers/authentication")
     .params({})
     .headers({
       ContentType: "application/json",
-      Accept: "application/vnd.enp.api+json;version=v1"
+      Accept: "application/vnd.enp.api+json;version=v1",
     })
     .body({
       grant_type: "client_credentials",
-      client_id: `${process.env.CLIENT_ID}`, // DO POPRAWY przeniesc do configa
-      client_secret: process.env.CLIENT_SECRET, // JW.
+      client_id: config.client_id,
+      client_secret: config.client_secret,
       old_token: null,
     })
     .postRequest(200);

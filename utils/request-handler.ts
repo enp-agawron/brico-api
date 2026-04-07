@@ -1,9 +1,9 @@
 import { test, expect, APIRequestContext } from "@playwright/test";
-import { APILoger } from "./logger";
+import { APILogger } from "./logger";
 
 export class RequestHandler {
   private request: APIRequestContext;
-  private logger: APILoger;
+  private logger: APILogger;
   private baseUrl: string | undefined;
   private defaultBaseUrl: string;
   private apiPath: string = "";
@@ -14,7 +14,7 @@ export class RequestHandler {
   constructor(
     request: APIRequestContext,
     apiBaseUrl: string,
-    logger: APILoger,
+    logger: APILogger,
   ) {
     this.request = request;
     this.defaultBaseUrl = apiBaseUrl;

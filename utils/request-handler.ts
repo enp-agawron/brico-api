@@ -10,15 +10,18 @@ export class RequestHandler {
   private queryParams: object = {};
   private apiHeaders: Record<string, string> = {};
   private apiBody: object = {};
+  private defaultAuthToken: string;
 
   constructor(
     request: APIRequestContext,
     apiBaseUrl: string,
     logger: APILogger,
+    authToken: string = "",
   ) {
     this.request = request;
     this.defaultBaseUrl = apiBaseUrl;
     this.logger = logger;
+    this.defaultAuthToken = authToken;
   }
 
   url(url: string) {
@@ -52,7 +55,7 @@ export class RequestHandler {
     const response = await this.request.get(url, {
       headers: this.apiHeaders,
     });
-    this.cleanFields()
+    this.cleanFields();
     const actualStatus = response.status();
     const responseJSON = await response.json();
 
@@ -70,13 +73,13 @@ export class RequestHandler {
       headers: this.apiHeaders,
       data: this.apiBody,
     });
-    this.cleanFields()
+    this.cleanFields();
     const actualStatus = response.status();
     const responseJSON = await response.json();
 
     this.logger.logResponse(actualStatus, responseJSON);
     this.statusCodeValidator(actualStatus, statusCode, this.postRequest);
-   
+
     return responseJSON;
   }
 
@@ -87,13 +90,13 @@ export class RequestHandler {
       headers: this.apiHeaders,
       data: this.apiBody,
     });
-    this.cleanFields()
+    this.cleanFields();
     const actualStatus = response.status();
     const responseJSON = await response.json();
 
     this.logger.logResponse(actualStatus, responseJSON);
     this.statusCodeValidator(actualStatus, statusCode, this.putRequest);
-  
+
     return responseJSON;
   }
 
@@ -103,7 +106,7 @@ export class RequestHandler {
     const response = await this.request.delete(url, {
       headers: this.apiHeaders,
     });
-    this.cleanFields()
+    this.cleanFields();
     const actualStatus = response.status();
     // const responseJSON = await response.json();
 
@@ -137,10 +140,10 @@ export class RequestHandler {
   }
 
   private cleanFields() {
-    this.apiBody = {}
-    this.apiHeaders = {}
-    this.baseUrl = undefined
-    this.apiPath = ''
-    this.queryParams = {}
+    this.apiBody = {};
+    this.apiHeaders = {};
+    this.baseUrl = undefined;
+    this.apiPath = "";
+    this.queryParams = {};
   }
 }

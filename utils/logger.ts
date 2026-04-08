@@ -4,7 +4,7 @@ export class APILogger {
   logRequest(
     method: string,
     url: string,
-    headers: Record<string, string>,
+    headers: Record<string, string | number>,
     body?: any,
   ) {
     const logEntry = { method, url, headers, body };

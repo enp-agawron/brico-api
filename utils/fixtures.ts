@@ -29,7 +29,12 @@ export const test = base.extend<TestOptions, WorkerFixture>({
   api: async ({ request, authToken }, use) => {
     const logger = new APILogger();
     setCustomExpectLogger(logger);
-    const requestHandler = new RequestHandler(request, config.apiUrl, logger, authToken);
+    const requestHandler = new RequestHandler(
+      request,
+      config.apiUrl,
+      logger,
+      authToken,
+    );
     await use(requestHandler);
   },
   config: async ({}, use) => {

@@ -18,7 +18,7 @@ export async function createToken(clientId: string, clientSecret: string) {
         old_token: null,
       })
       .postRequest(200);
-    return tokenResponse.access_token;
+    return `Bearer ${tokenResponse.access_token}`;
   } catch (error: any) {
     Error.captureStackTrace(error, createToken);
     throw error;

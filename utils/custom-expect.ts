@@ -21,7 +21,7 @@ export const expect = baseExpect.extend({
     let logs: string = "";
 
     try {
-      baseExpect(recived).toEqual(expect);
+      baseExpect(recived).toEqual(expected);
       pass = true;
       if (this.isNot) {
         logs = apiLogger.getRecentLogs();
@@ -37,7 +37,7 @@ export const expect = baseExpect.extend({
         isNot: this.isNot,
       }) +
       "\n\n" +
-      `Expected: ${hint} ${this.utils.printExpected(expected)}\n` +
+      `Expected: ${hint}${this.utils.printExpected(expected)}\n` +
       `Recived: ${this.utils.printReceived(recived)}\n\n` +
       `Recent API Activity: \n${logs}`;
 

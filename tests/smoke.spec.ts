@@ -1,24 +1,17 @@
+import { expect } from "../utils/custom-expect";
 import { createToken } from "../helpers/createToken";
 import { test } from "../utils/fixtures";
 import { APILogger } from "../utils/logger";
 
-test("first", async ({ api, config }) => {
-  // const response = await api
-  //   .path("/customers/authentication")
-  //   .params({})
-  //   .headers({
-  //     ContentType: "application/json",
-  //     Accept: "application/vnd.enp.api+json;version=v1",
-  //   })
-  //   .body({
-  //     grant_type: "client_credentials",
-  //     client_id: config.client_id,
-  //     client_secret: config.client_secret,
-  //     old_token: null,
-  //   })
-  //   .postRequest(200);
-  const authToken = await createToken(config.client_id, config.client_secret);
-  console.log(authToken);
+test("first", async ({ api }) => {
+  const getCategoriesTree = await api
+    .path("/categories/tree")
+    .params({ filter: '{ "main_category": 1 }' })
+    .headers({ "Content-Website": "4" })
+    .getRequest(200);
+
+  const categoriesID = getCategoriesTree[0].children[0].id;
+  expect(categoriesID).shouldEqual(5064);
 });
 
 test("logger test", () => {

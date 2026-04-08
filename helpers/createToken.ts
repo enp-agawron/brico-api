@@ -11,10 +11,6 @@ export async function createToken(clientId: string, clientSecret: string) {
   try {
     const tokenResponse = await api
       .path("/customers/authentication")
-      .headers({
-        ContentType: "application/json",
-        Accept: "application/vnd.enp.api+json;version=v1",
-      })
       .body({
         grant_type: "client_credentials",
         client_id: clientId,

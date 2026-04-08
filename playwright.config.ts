@@ -30,6 +30,10 @@ export default defineConfig({
 
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
     trace: "on-first-retry",
+    extraHTTPHeaders: {
+      ContentType: "application/json",
+      Accept: "application/vnd.enp.api+json;version=v1",
+    },
   },
 
   /* Configure projects for major browsers */

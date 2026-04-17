@@ -1,10 +1,9 @@
 import { expect } from "../../utils/custom-expect";
 import { test } from "../../utils/fixtures";
-import { APILogger } from "../../utils/logger";
 
 test.describe.serial("Create order", () => {
-  let main_category: string;
-  let offer_id: string;
+  let categoryId: string;
+  let offerId: string;
 
   test("Krok 1: Pobieram główną kategorie", async ({ api }) => {
     const getCategoriesTree = await api
@@ -13,12 +12,23 @@ test.describe.serial("Create order", () => {
       .headers({ "Content-Website": "4" })
       .getRequest(200);
 
-    const categoriesID = getCategoriesTree[0].children[0].id;
-    main_category = categoriesID;
-    expect(categoriesID).shouldEqual(5064);
+    const firstCategoryId = getCategoriesTree[0].children[0].id;
+    const categoryName = getCategoriesTree[0].children[0].name;
+    categoryId = firstCategoryId;
+    expect(firstCategoryId).shouldEqual(5064);
+    expect(categoryName).shouldEqual("Okazje online");
   });
 
-  test("Krok 2: Pobieram ofertę", async ({ api }) => {});
+  test("Krok 2: Pobieram ofertę", async ({ api }) => {
+    const getOffer = await api
+      .path(`/categories/${categoryId}/product-offers`)
+      .headers({ "Content-Website": "4" })
+      .getRequest(200);
+
+    const firstOffer = getOffer.offers[0].id;
+    offerId = firstOffer;
+    console.log(firstOffer);
+  });
   test("Krok 3: ", async ({ api }) => {});
   test("Krok 4: ", async ({ api }) => {});
   test("Krok 5: ", async ({ api }) => {});

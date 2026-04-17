@@ -11,7 +11,7 @@ export class APILogger {
     this.recentLogs.push({ type: "Request Details", data: logEntry });
   }
 
-  logResponse(statusCode: number, body?: any) {
+  logResponse(statusCode?: number, body?: any) {
     const logEntry = { statusCode, body };
     this.recentLogs.push({ type: "Response Details", data: logEntry });
   }

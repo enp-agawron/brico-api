@@ -1,5 +1,4 @@
 import { expect } from "../utils/custom-expect";
-import { createToken } from "../helpers/createToken";
 import { test } from "../utils/fixtures";
 import { APILogger } from "../utils/logger";
 

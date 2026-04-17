@@ -31,7 +31,7 @@ export default defineConfig({
     },
        {
       name: "api-order",
-      testMatch: 'order*',
+      testMatch: '*order*',
       // dependencies: ['api-smoke']
     },
   ],
